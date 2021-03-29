@@ -3,8 +3,6 @@ package com.udacity.asteroidradar.main
 import android.app.Application
 import androidx.lifecycle.*
 import com.udacity.asteroidradar.Asteroid
-import com.udacity.asteroidradar.database.AsteroidDatabase
-import com.udacity.asteroidradar.database.asDomainModel
 import com.udacity.asteroidradar.database.getDatabase
 import com.udacity.asteroidradar.repository.AsteroidsRepository
 import com.udacity.asteroidradar.utils.Event
@@ -13,15 +11,19 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    val asteroidsList = MutableLiveData<Event<List<Asteroid>>>()
     private val database = getDatabase(application)
     private val repository = AsteroidsRepository(database)
-    val asteroids = MutableLiveData(Event(repository.asteroids.value?.asDomainModel()))
+    val asteroids = repository.asteroids
+    val navigateToDetailScreen = MutableLiveData<Event<Asteroid>>()
 
     init {
         viewModelScope.launch {
             repository.refreshAsteroids()
         }
+    }
+
+    fun navigateToDetailPage(asteroid: Asteroid) {
+        navigateToDetailScreen.value = Event(asteroid)
     }
 
     /**
