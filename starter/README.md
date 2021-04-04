@@ -1,6 +1,5 @@
 
 
-#Please put this API_KEY = "CRKiqDFlKwVsxfPLynJhR9AAGhCaDibe4Fad8srx" value the API_KEY constant in constants file
 
 
 ## Purpose of this Folder
