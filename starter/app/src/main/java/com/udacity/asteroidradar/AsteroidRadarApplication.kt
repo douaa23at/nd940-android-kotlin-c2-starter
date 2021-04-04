@@ -13,6 +13,7 @@ class AsteroidRadarApplication : Application() {
 
     val applicationScope = CoroutineScope(Dispatchers.Default)
 
+
     override fun onCreate() {
         super.onCreate()
         setupWork()

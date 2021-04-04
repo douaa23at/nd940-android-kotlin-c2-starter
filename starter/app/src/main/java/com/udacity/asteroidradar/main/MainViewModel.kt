@@ -14,11 +14,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val database = getDatabase(application)
     private val repository = AsteroidsRepository(database)
     val asteroids = repository.asteroids
+    val pictureOfDay = repository.pictureOfDay
     val navigateToDetailScreen = MutableLiveData<Event<Asteroid>>()
 
     init {
         viewModelScope.launch {
             repository.refreshAsteroids()
+            repository.refreshPictureOfTheDay()
         }
     }
 

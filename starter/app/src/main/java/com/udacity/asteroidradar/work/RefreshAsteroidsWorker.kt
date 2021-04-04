@@ -9,6 +9,7 @@ import retrofit2.HttpException
 
 class RefreshAsteroidsWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
+
     override suspend fun doWork(): Result {
         val database = getDatabase(applicationContext)
         val repository = AsteroidsRepository(database)
